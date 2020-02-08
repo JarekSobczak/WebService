@@ -21,13 +21,13 @@ public class WebserviceApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Product product1=new Product("kurtka", "męska", Type.MALE, 100.0);
-        Product product2=new Product("spódnica","damska", Type.FEMALE, 80.0);
-        Product product3=new Product("piłka", "plażowa", Type.KID, 20.0);
-        Product product4=new Product("okulary", "przeciwsłoneczne", Type.MALE, 70.0);
-        Product product5=new Product("chustka", "jedwabna", Type.FEMALE, 90.0);
-        Product product6=new Product("czapka", "baseball", Type.KID, 20.0);
+        Product product1 = new Product("kurtka", "męska", Type.MALE, 100.0);
+        Product product2 = new Product("spódnica", "damska", Type.FEMALE, 80.0);
+        Product product3 = new Product("piłka", "plażowa", Type.KID, 20.0);
+        Product product4 = new Product("okulary", "przeciwsłoneczne", Type.MALE, 70.0);
+        Product product5 = new Product("chustka", "jedwabna", Type.FEMALE, 90.0);
+        Product product6 = new Product("czapka", "baseball", Type.KID, 20.0);
 
-        repo.getProducts().addAll(Lists.newArrayList(product1,product2,product3,product4,product5,product6));
+        repo.getProducts().addAll(Lists.newArrayList(product1, product2, product3, product4, product5, product6));
     }
 }

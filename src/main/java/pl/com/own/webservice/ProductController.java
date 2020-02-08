@@ -20,12 +20,12 @@ public class ProductController {
     }
 
     @GetMapping("/names")
-    public ResponseEntity<List<String>>getAllNames(){
+    public ResponseEntity<List<String>> getAllNames() {
         return ResponseEntity.ok(service.getNamesOfAllProducts());
     }
 
     @GetMapping
-    public ResponseEntity<Product>getProduct(@RequestParam String name){
+    public ResponseEntity<Product> getProduct(@RequestParam String name) {
         return ResponseEntity.ok(service.findOne(name));
     }
 }

@@ -6,9 +6,10 @@ import pl.com.own.webservice.model.Product;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Data
 @Repository
 public class ProductRepo {
 
-    private List<Product> products=new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
 }
