@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Produkty</title>
+</head>
+<body>
+
+<div class="container" style="overflow: auto">
+    <h3 id="product"></h3>
+</div>
+
+<script>
+    fetch('http://localhost:8080/products')
+        .then(result => result.json())
+        .then(data => data.map(product => createOption(product)));
+
+    let myParent = document.body;
+    let selectList = document.createElement("select");
+    selectList.id = "mySelect";
+
+    myParent.appendChild(selectList);
+    let opt = document.createElement('option');
+    opt.value = null;
+    opt.innerText = "Wybierz";
+    selectList.appendChild(opt);
+
+    function createOption(product) {
+        let opt = document.createElement('option');
+        opt.value = product;
+        opt.innerText = product;
+        selectList.appendChild(opt);
+    }
+
+    let name;
+    if (document.getElementById('mySelect') != null) {
+        document.getElementById('mySelect').onchange = function () {
+            name = this.value;
+            getByName(name);
+        };
+    }
+
+    function getByName(name) {
+            fetch('http://localhost:8080/products/' + name)
+                .then(data=>{
+                    return data.text()
+                })
+                .then(result=> {
+                    document.getElementById("product").innerText = result
+                                                    .replace('{','').replace('}','')
+                                                    .replace('name','produkt').replace('description','opis')
+                                                    .replace('type','typ').replace('price','cena z rabatem')
+                                                    .replace('counter','ilość wyświetleń')
+                })
+    }
+</script>
+</body>
+</html>

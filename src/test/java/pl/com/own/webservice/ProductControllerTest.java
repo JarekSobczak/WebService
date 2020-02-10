@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import pl.com.own.webservice.model.Product;
 import pl.com.own.webservice.model.Type;
@@ -34,7 +35,7 @@ public class ProductControllerTest {
         ResponseEntity<ArrayList<String>> expected = ResponseEntity.ok(listOfNames);
         Mockito.when(service.getNamesOfAllProducts()).thenReturn(listOfNames);
         //when
-        ResponseEntity<List<String>> result = controller.getAllNames();
+        HttpEntity<List<String>> result = controller.getAllNames();
         //then
         Assert.assertEquals(expected, result);
     }
@@ -46,7 +47,7 @@ public class ProductControllerTest {
         ResponseEntity<ArrayList<String>> expected = ResponseEntity.ok(listOfNames);
         Mockito.when(service.getNamesOfAllProducts()).thenReturn(listOfNames);
         //when
-        ResponseEntity<List<String>> result = controller.getAllNames();
+        HttpEntity<List<String>> result = controller.getAllNames();
         //then
         Assert.assertEquals(expected, result);
     }
@@ -58,7 +59,7 @@ public class ProductControllerTest {
         ResponseEntity<ArrayList<String>> expected = ResponseEntity.ok(Lists.newArrayList("książka", "kubek"));
         Mockito.when(service.getNamesOfAllProducts()).thenReturn(listOfNames);
         //when
-        ResponseEntity<List<String>> result = controller.getAllNames();
+        HttpEntity<List<String>> result = controller.getAllNames();
         //then
         Assert.assertNotEquals(expected, result);
     }
@@ -70,19 +71,19 @@ public class ProductControllerTest {
         ResponseEntity<Product> expected = ResponseEntity.ok(product);
         Mockito.when(service.findOne("stolik")).thenReturn(product);
         //when
-        ResponseEntity<Product> result = controller.getProduct("stolik");
+        HttpEntity<Product> result = controller.getProduct("stolik");
         //then
         Assert.assertEquals(expected, result);
     }
 
     @Test
-    public void testShouldReturnOneProductButResultIsEmpty() {
+    public void testShouldReturnOneProductButResultIsNull() {
         //given
         Product product = new Product("stolik", "nowy", Type.MALE, 200.0);
         ResponseEntity<Product> expected = ResponseEntity.ok(product);
-        Mockito.when(service.findOne("stolik")).thenReturn(product);
+        Mockito.when(service.findOne(Mockito.any())).thenReturn(null);
         //when
-        ResponseEntity<Product> result = controller.getProduct("dom");
+        HttpEntity<Product> result = controller.getProduct("dom");
         //then
         Assert.assertNotEquals(expected, result);
     }

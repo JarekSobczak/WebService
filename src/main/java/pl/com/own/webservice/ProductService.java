@@ -26,10 +26,9 @@ public class ProductService {
         Product found = repo.getProducts().stream()
                 .filter(product -> product.getName().equalsIgnoreCase(name))
                 .findFirst().orElse(null);
-        if (found != null) {
-            setPrice(found);
-            found.setCounter(found.getCounter() + 1);
-        }
+        if (found !=null) found.setCounter(found.getCounter() + 1);
+        if (found != null&& found.getCounter()==1) setPrice(found);
+
         return found;
     }
 
